@@ -1,0 +1,52 @@
+<style>
+    .modal-content {
+        background-color: #2d2c2c;
+    }
+</style>
+
+
+<!-- Modal info-->
+<div class="modal fade" id="Modal-add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">Add Student</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        
+        <form method="POST" class="form-register" style="color:white ;">
+            {{form.hidden_tag()}}
+            <br>
+            {{form.student_id.label()}}
+            {{ form.student_id(class="form-control", placeholder="Student ID") }}
+            {{ form.name.label() }}
+            {{ form.name(class="form-control", placeholder="Student Name") }}
+            
+            {{ form.email_address.label() }}
+            {{ form.email_address(class="form-control", placeholder="Email Address") }}
+            <br>
+            <img src="{{url_for('video_feed')}}" alt="idk" class="img-fluid" />
+            <br>
+            <input type="hidden" name="action" value="add">
+            {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+
+            
+        </form>
+
+
+
+
+
+        
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+</div>
+</div>
+
+

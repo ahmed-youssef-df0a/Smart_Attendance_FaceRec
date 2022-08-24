@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}
+    Add Professor
+{% endblock %}
+{% block homebut %}
+<a class="navbar-brand" href="{{ url_for('admin')}}">Admin Page</a>
+{% endblock %}
+{% block nav_focus %}
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('admin') }}">
+                    Dashboard
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+{% block content %}
+<body class="text-center">
+    <div class="container-fixed w-75 h-50 my-3 text-white" style=" margin-left: auto; margin-right: auto;">
+        
+        <h1>Add Professor Form</h1>
+        <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <!-- Your Columns HERE -->
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email Adress</th>
+                <th scope="col">Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for professor in professors %}
+              <!-- Your rows inside the table HERE: -->
+              <tr>
+                <td>{{professor.id}}</td>
+                <td>{{professor.name}}</td>
+                <td>{{professor.email_address}}</td>
+                <td>
+                    <form method="POST">
+                      {{form.hidden_tag()}}
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="id" value="{{professor.id}}">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+              </tr>
+              {% endfor %}
+              <tr>
+                <td class="border-right"></td>
+                <form method="POST" class="form-register" style="color:white ;">
+                {{form.hidden_tag()}}
+                <td class="border-right">
+                  
+                  {{ form.name(class="form-control", placeholder="Professor Name") }}
+                </td>
+                <td class="border-right">
+                  
+                  {{ form.email_address(class="form-control", placeholder="Email Address") }}
+                </td>
+                <td>
+                  <input type="hidden" name="action" value="add">
+                  {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+                </td>
+              </form>
+              </tr>
+              
+            </tbody>
+          </table>
+        
+        
+    </div>
+    
+</body>
+{% endblock %}

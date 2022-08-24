@@ -1,0 +1,62 @@
+{% extends 'base.html'%}
+{% block title %}
+    Welcome To TEST V0.1
+{% endblock %}
+{% block homebut %}
+<a class="navbar-brand" href="{{ url_for('home')}}">Home Page</a>
+{% endblock %}
+{% block nav_focus %}
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('home') }}">
+                    Home<span class="sr-only">(current)</span>
+            </a>
+        </li>
+    </ul>
+    
+{% endblock %}
+
+{% block content %}
+    <div class="position-relative overflow-hidden m-md-3 text-center bg-dark" style="color:white">
+        <img class="rounded" src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+        <div class="col-md-9 p-lg-5 mx-auto my-1">
+            <h1>Welcome {{ name }}</h1>
+            <div class="col">
+                <h3>Courses</h3>
+                <br>
+                <table class="table table-hover table-dark">
+                    <thead>
+                      <tr>
+                        <!-- Your Columns HERE -->
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Start</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for course in courses %}
+                      <!-- Your rows inside the table HERE: -->
+                      <tr>
+                        <td>{{course.course_id}}</td>
+                        <td>{{course.course_name}}</td>
+                        <td>
+                            <form method="POST">
+                                <input type="hidden" name="action" value="start">
+                                <input type="hidden" name="course_id" value="{{course.course_id}}">
+                                <button type="submit" class="btn btn-block btn-primary">Start Lecture</button>
+                            </form>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                      
+                      
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        
+        <div class="product-device box-shadow d-none d-md-block"></div>
+        <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+    </div>
+{% endblock %}

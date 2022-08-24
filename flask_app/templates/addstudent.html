@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}
+    Add Student
+{% endblock %}
+{% block homebut %}
+<a class="navbar-brand" href="{{ url_for('admin')}}">Admin Page</a>
+{% endblock %}
+{% block nav_focus %}
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('admin') }}">
+                    Dashboard
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+{% block content %}
+{% include 'includes/add.html'%}
+<body class="text-center">
+    <div class="container-fixed w-75 h-50 p-3 my-3 text-white" style=" margin-left: auto; margin-right: auto;">
+        
+        <h1>Add Student Form</h1>
+        <button class="btn btn-outline btn-info" data-toggle="modal" data-target="#Modal-add"  >Add Student</button>
+        <br>
+        <br>
+        <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <!-- Your Columns HERE -->
+                <th scope="col">ID</th>
+                <th scope="col">Student ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email Adress</th>
+                <th scope="col">Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for student in students %}
+              <!-- Your rows inside the table HERE: -->
+              <tr>
+                <td>{{student.id}}</td>
+                <td>{{student.student_id}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.email_address}}</td>
+                <td>
+                    <form method="POST">
+                      {{form.hidden_tag()}}
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="id" value="{{student.id}}">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+              </tr>
+              {% endfor %}
+              
+              
+            </tbody>
+          </table>
+        
+    </div>
+    
+</body>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html'%}
+{% block title %}
+    Welcome To TEST V0.1
+{% endblock %}
+{% block homebut %}
+<a class="navbar-brand" href="{{ url_for('admin')}}">Admin Page</a>
+{% endblock %}
+{% block nav_focus %}
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('admin') }}">
+                    Dashboard<span class="sr-only">(current)</span>
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div class="position-relative overflow-hidden m-md-3 text-center bg-dark" style="color:white">
+        <div class="col-md p-lg-5 mx-auto">
+            <h1 class="display-4 font-weight-normal">Admin</h1>
+            
+            <table>
+            </table>
+            <div class="row">
+                <div class="col border-right">
+                    <h2>Edit Personals</h2>
+                    <a class="btn btn-lg btn-block btn-primary" href="{{ url_for('addprofessor') }}">Professor</a>
+                    <a class="btn btn-lg btn-block btn-primary" href="{{ url_for('addadmin') }}">Admin</a>
+                    <a class="btn btn-lg btn-block btn-primary" href="{{ url_for('addstudent') }}">Student</a>
+                </div>
+                <div class="col border-right">
+                    <h2>Users</h2>
+                    <a class="btn btn-lg btn-block btn-primary" href="{{ url_for('manageusers') }}">Manage Users</a>
+                    <a class="btn btn-lg btn-block btn-primary" href="{{ url_for('addprofessoruser') }}">Add Professor User</a>
+                    <a class="btn btn-lg btn-block btn-primary" href="{{ url_for('addadminuser') }}">Add Admin User</a>
+                </div>
+                <div class="col">
+                    <h2>Courses</h2>
+                    <a class="btn btn-lg btn-block btn-primary" href="{{ url_for('course') }}">Manage Courses</a>
+                    <a class="btn btn-lg btn-block btn-primary" href="{{ url_for('assigncoursetoprof') }}">Assign Course To Professor</a>
+                    <a class="btn btn-lg btn-block btn-primary" href="{{ url_for('assigncoursetostudent') }}">Assign Student To Course</a>
+                </div>
+            </div>
+         </div>
+        <div class="product-device box-shadow d-none d-md-block"></div>
+        <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+    </div>
+{% endblock %}

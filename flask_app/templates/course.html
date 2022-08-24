@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}
+    Manage Courses
+{% endblock %}
+{% block homebut %}
+<a class="navbar-brand" href="{{ url_for('admin')}}">Admin Page</a>
+{% endblock %}
+{% block nav_focus %}
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('admin') }}">
+                    Dashboard
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+{% block content %}
+<body class="text-center">
+    <div class="container-fixed w-50 h-50 p-3 my-3 text-white" style=" margin-left: auto; margin-right: auto;">
+        
+        <h1>Manage Courses</h1>
+        <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <!-- Your Columns HERE -->
+                <th scope="col">Course ID</th>
+                <th scope="col">Course Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for course in courses %}
+              <!-- Your rows inside the table HERE: -->
+              <tr>
+                <td>{{course.course_id}}</td>
+                <td>{{course.course_name}}</td>
+                <td>{{course.course_day}}</td>
+                <td>
+                    <form method="POST">
+                      {{form.hidden_tag()}}
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="course_id" value="{{course.course_id}}">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+              </tr>
+              {% endfor %}
+              <tr>
+                
+                <form method="POST" class="form-register" style="color:white ;">
+                {{form.hidden_tag()}}
+                <td class="border-right">
+                  
+                    {{ form.course_id(class="form-control", placeholder="Course ID") }}
+                  </td>
+                <td class="border-right">
+                  
+                  {{ form.course_name(class="form-control", placeholder="Course Name") }}
+                </td>
+                <td class="border-right">
+                  
+                  {{ form.course_day(class="form-control", placeholder="Course Day") }}
+                </td>
+                
+                <td>
+                  <input type="hidden" name="action" value="add">
+                  {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+                </td>
+              </form>
+              </tr>
+              
+            </tbody>
+          </table>
+        
+    </div>
+    
+</body>
+{% endblock %}

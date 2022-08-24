@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %}
+    manage Users
+{% endblock %}
+{% block homebut %}
+<a class="navbar-brand" href="{{ url_for('admin')}}">Admin Page</a>
+{% endblock %}
+{% block nav_focus %}
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('admin') }}">
+                    Dashboard
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+{% block content %}
+<body class="text-center">
+    <div class="container-fixed w-100 h-50 p-3 my-3 text-white" style=" margin-left: auto; margin-right: auto;">
+        
+        <h1>Manage Users</h1>
+        <div class="row">
+            <div class="col">
+                <h3>Admin Users</h3>
+                <a class="btn btn-lg btn-block btn-primary" href="{{ url_for('addadminuser') }}">Add Admin User</a>
+                <br>
+                <table class="table table-hover table-dark">
+                    <thead>
+                      <tr>
+                        <!-- Your Columns HERE -->
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Options</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for useradmin in useradmin %}
+                      <!-- Your rows inside the table HERE: -->
+                      <tr>
+                        <td>{{useradmin[0]}}</td>
+                        <td>{{useradmin[1]}}</td>
+                        <td>{{useradmin[2]}}</td>
+                        <td>
+                            <form method="POST">
+                                <input type="hidden" name="action" value="deleteadmin">
+                                <input type="hidden" name="user_id" value="{{useradmin[0]}}">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                      
+                      
+                    </tbody>
+                  </table>
+            </div>
+            <div class="col">
+
+                <h3>Professor Users</h3>
+                <a class="btn btn-lg btn-block btn-primary" href="{{ url_for('addprofessoruser') }}">Add Professor User</a>
+                <br>
+                <table class="table table-hover table-dark">
+                    <thead>
+                      <tr>
+                        <!-- Your Columns HERE -->
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Options</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for userprof in userprof %}
+                      <!-- Your rows inside the table HERE: -->
+                      <tr>
+                        <td>{{userprof[0]}}</td>
+                        <td>{{userprof[1]}}</td>
+                        <td>{{userprof[2]}}</td>
+                        <td>
+                            <form method="POST">
+                                <input type="hidden" name="action" value="deleteprof">
+                                <input type="hidden" name="user_id" value="{{userprof[0]}}">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                      
+                      
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        
+        
+    </div>
+    
+</body>
+{% endblock %}

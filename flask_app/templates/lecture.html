@@ -1,0 +1,91 @@
+{% extends 'base.html'%}
+{% block title %}
+Lecture
+{% endblock %}
+{% block homebut %}
+<a class="navbar-brand" href="{{ url_for('home')}}">Lecture Page</a>
+{% endblock %}
+{% block nav_focus %}
+<ul class="navbar-nav mr-auto">
+    <li class="nav-item ">
+        <a class="nav-link" href="{{ url_for('home') }}">
+            Home
+        </a>
+    </li>
+</ul>
+
+{% endblock %}
+
+{% block content %}
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-dark" style="color:white">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col text-center">
+            <h1>Welcome {{ prof_name }}</h1>
+            <h2  >{{ course_name }}</h2>
+        </div>
+        <div class="col"></div>
+
+    </div>
+        <div class="row">
+            <div class="col-md-5">
+                <img src="{{url_for('ai')}}" alt="idk" class="img-fluid align-content-center" />
+            </div>
+            <div class="col-md-7 ">
+                <table id="target_table_id" class="table table-hover table-dark">
+                    <thead>
+                        <tr>
+                            <!-- Your Columns HERE -->
+                            <th scope="col"> Course ID</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Student Name</th>
+
+                            <th scope="col">Student ID</th>
+
+                            <th scope="col">Time</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="action" value="stop">
+            <button type="submit" class="btn btn-block btn-danger">Stop Lecture</button>
+        </form>
+
+        <div class="product-device box-shadow d-none d-md-block"></div>
+        <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+    
+</div>
+    <script>
+        $(document).ready(function () {
+            function update_table() {
+                $.getJSON("{{url_for('log')}}", function (data) {
+                    var tbl_body = "";
+                    var odd_even = false;
+                    $.each(data, function () {
+                        var tbl_row = "";
+                        $.each(this, function (k, v) {
+                            tbl_row += "<td>" + v + "</td>";
+                        });
+                        tbl_body += "<tr class=\"" + (odd_even ? "odd" : "even") + "\">" + tbl_row + "</tr>";
+                        odd_even = !odd_even;
+                    });
+                    $("#target_table_id tbody").html(tbl_body);
+                });
+            }
+            update_table();
+
+            var interval = setInterval(update_table, 3000);
+        });
+
+
+
+
+    </script>
+
+    {% endblock %}

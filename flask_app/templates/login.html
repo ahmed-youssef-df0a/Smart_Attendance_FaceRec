@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+    LogIn Page
+{% endblock %}
+{% block homebut %}
+<a class="navbar-brand" href="{{ url_for('home')}}">Home Page</a>
+{% endblock %}
+{% block nav_focus %}
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item ">
+            <a class="nav-link" href="{{ url_for('home') }}">
+                    Home
+            </a>
+        </li>
+    </ul>
+    
+{% endblock %}
+{% block content %}
+<body class="text-center">
+    <div class="container-fixed w-50 h-50 p-3 my-3 text-white" style=" margin-left: auto; margin-right: auto;">
+        
+        <h1>LogIn Form</h1>
+        <form method="POST" class="form-signin" style="color:white ;">
+            {{form.hidden_tag()}}
+            <br>
+            {{ form.username.label() }}
+            {{ form.username(class="form-control", placeholder="User Name") }}
+
+            {{ form.password.label() }}
+            {{ form.password(class="form-control", placeholder="Password") }}
+
+            <br>
+            {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+            <br>
+            
+        </form>
+        
+    </div>
+</body>
+{% endblock %}
